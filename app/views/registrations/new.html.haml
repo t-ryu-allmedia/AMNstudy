@@ -1,24 +1,26 @@
 #registrations-new
-  .col-xs-6.left-content
-    %h1 #Tsubuyaki
+  .col-xs-12.col-sm-6.left-content
+    %h1 AMN
     %p.ex
-      このサイトは、シラバスのRails学習コースの完成形サンプルアプリです。Microsoft Azure上で運用されています。
+      AMN勉強会でSIチーム作成
     %p.by
-      開発者: @ohataken デザイン: @keito0904 企画: @saiwaki14
+      チームメンバー：大西マネージャ ､金丸リーダ､北側さん､涌井さん､柳
+      %br
+      協力者:　SOチーム方々
     - if notice
       %p
         .alert.alert-info= notice
-  .col-xs-6.right-content
+  .col-xs-12.col-sm-6.right-content
     = form_for @user, url: registrations_path, method: :post do |f|
       %h2
-        会員登録する
+        会員登録
       - @user.errors.each do |attr, message|
         .alert.alert-danger= message
       .form-group
-        = f.label :name, "ユーザーID: @cyllabus_jp", class: "control-label"
+        = f.label :name, "ユーザーID:", class: "control-label"
         = f.text_field :name, class: "form-control"
       .form-group
-        = f.label :email,"メールアドレス: hello@cyllabus.jp", class: "control-label"
+        = f.label :email,"メールアドレス:", class: "control-label"
         = f.text_field :email, class: "form-control"
       .form-group
         = f.label :password, "パスワード: 6文字以上", class: "control-label"
