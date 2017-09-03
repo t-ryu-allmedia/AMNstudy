@@ -19,4 +19,12 @@ class User < ActiveRecord::Base
   def followed_by? user
     inverse_follows.where(follower_id: user.id).exists?
   end
+
+  def first_tweets
+    tweets.first
+  end
+
+  def current_month_first_tweets?
+    first_tweets.created_at.month == DateTime.now.month
+  end
 end

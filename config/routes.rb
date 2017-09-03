@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     get :favorites, on: :member
     get :follows, on: :member
     get :followers, on: :member
+    collection do
+      get :check_list
+    end
   end
 
   resources :tweets do

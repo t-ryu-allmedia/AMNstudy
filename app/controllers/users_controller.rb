@@ -24,4 +24,9 @@ class UsersController < ApplicationController
   def followers
     @user = User.find(params[:id])
   end
+
+  def check_list
+    @q        = User.search(params[:q])
+    @users = @q.result(distinct: true)
+  end
 end

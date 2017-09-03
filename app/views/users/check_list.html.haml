@@ -1,0 +1,17 @@
+%table.table
+  %thead
+    %tr
+      %th= sort_link(@q, :id, 'id', default_order: :desc)
+      %th= sort_link(@q, :name, '名前', default_order: :desc)
+      %th= sort_link(@q, :tweets_content, '最後の発言', default_order: :desc)
+      %th= sort_link(@q, :tweets_created_at, '発言日', default_order: :desc)
+      %th= '発言状況'
+
+  %tbody
+    - @users.each do |user|
+      %tr
+        %th= user.id
+        %td= user.name
+        %td= user.first_tweets.content
+        %td= user.first_tweets.created_at.strftime("%Y年 %m月 %d日 %H:%M:%S")
+        %td= user.current_month_first_tweets? ? "○" : "×"

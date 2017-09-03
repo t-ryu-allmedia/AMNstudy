@@ -12,6 +12,7 @@
       %ul.nav.navbar-nav.navbar-right
         %li= link_to "全ツイート一覧", tweets_path
         %li= link_to "ユーザー一覧", users_path
+        %li= link_to "発言状況",  check_list_users_path
         %li= link_to "設定", edit_settings_path
         %li= link_to "ログアウト", sessions_path, method: :delete
   - else
