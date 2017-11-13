@@ -7,6 +7,7 @@ class TweetsController < ApplicationController
   def index
     @tweets = Tweet.all
     @tweet  = Tweet.new
+    @title = Title.first
   end
 
   def timeline

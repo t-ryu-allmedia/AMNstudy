@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @title.date
+%p
+  %b Content:
+  = @title.content
+%p
+  %b Created by user:
+  = @title.created_by_user
+
+= link_to 'Edit', edit_title_path(@title)
+\|
+= link_to 'Back', titles_path
