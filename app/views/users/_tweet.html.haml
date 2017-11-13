@@ -19,3 +19,5 @@
         = link_to "フォロー解除", user_follows_path(t.user), method: :delete
       - else
         = link_to "フォロー", user_follows_path(t.user), method: :post
+      - if t.user_id == current_user.id
+        = link_to "削除", tweet_path(t), method: :delete
