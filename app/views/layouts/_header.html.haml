@@ -1,19 +1,23 @@
 .navbar.navbar-default
-  .nabar-header
-    = link_to 'AMN安否確認', root_url, class: "navbar-brand"
-    = link_to current_user.name, current_user,class: "navbar-brand"
   - if logged_in?
-    %button.navbar-toggle.collapsed{type:"button", "data-toggle" => "collapse", "data-target" => "#gnavi"}
-      %span.sr-only メニュー
-      %span.icon-bar
-      %span.icon-bar
-      %span.icon-bar
-    #gnavi.collapse.navbar-collapse
-      %ul.nav.navbar-nav.navbar-right
-        %li= link_to "全ツイート一覧", tweets_path
-        %li= link_to "ユーザー一覧", users_path
-        %li= link_to "設定", edit_settings_path
-        %li= link_to "ログアウト", sessions_path, method: :delete
+    .header-menu
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle.collapsed{"data-target" => "#navbarEexample1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only メニュー
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to 'AMN安否確認', root_url, class: "navbar-brand"
+          = link_to current_user.name, current_user,class: "navbar-brand"
+
+        #navbarEexample1.collapse.navbar-collapse
+          %ul.nav.navbar-nav.pull-right
+            %li= link_to "全ツイート一覧", tweets_path
+            %li= link_to "ユーザー一覧", users_path
+            %li= link_to "設定", edit_settings_path
+            %li= link_to "ログアウト", sessions_path, method: :delete
+
   - else
     %ul.nav.navbar-nav.navbar-right
       %li= link_to "会員登録", new_registrations_path
