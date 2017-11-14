@@ -16,3 +16,7 @@
           %td= user.first_tweets.content
           %td= user.first_tweets.created_at.strftime("%Y年 %m月 %d日 %H:%M:%S")
           %td= user.current_month_first_tweets? ? "○" : "×"
+        -else
+          %td= "×"
+          %td= "×"
+          %td= "×"
