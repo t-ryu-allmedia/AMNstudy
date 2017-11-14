@@ -3,7 +3,7 @@ class Tweet < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
 
   validates :user, presence: true
-  validates :content, presence: true, length: { in: 1..140 }
+  validates :content, presence: true, length: { in: 1..255 }
 
   default_scope -> { order(created_at: :desc) }
 
