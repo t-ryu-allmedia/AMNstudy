@@ -18,6 +18,7 @@
             %li= link_to "発言状況", check_list_users_path
             %li= link_to "設定", edit_settings_path
             %li= link_to "ログアウト", sessions_path, method: :delete
+            %li= link_to "タイトル作成", new_title_path
 
   - else
     %ul.nav.navbar-nav.navbar-right

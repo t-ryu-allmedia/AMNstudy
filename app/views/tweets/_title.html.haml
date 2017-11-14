@@ -1,0 +1,12 @@
+- if logged_in?
+  .panel.panel-default
+    .panel-header
+      .title
+        今月のタイトル
+    .panel-body
+      -if @title.present?
+        =@title.content
+      -else
+        なし
+
+
