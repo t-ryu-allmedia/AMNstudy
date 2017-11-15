@@ -26,7 +26,36 @@ class UsersController < ApplicationController
   end
 
   def check_list
-    @q = User.search(params[:q])
-    @users = @q.result(distinct: true)
+    respond_to do |format|
+      # index ページを表示するため html フォーマットについて記述
+      format.html do
+        @q = User.search(params[:q])
+        @users = @q.result(distinct: true)
+      end
+      # index.xlsx.ruby がレンダーされる
+      format.xlsx do
+        @q = User.search(params[:q])
+        @users = @q.result(distinct: true)
+        User.excel_import(@users)
+        file_path = "#{Rails.root.to_s}/public/sample.xlsx"
+        send_file file_path,
+                  filename: "sample.xlsx",
+                  type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      end
+    end
+  end
+
+  private
+
+  def generate_xlsx
+    Axlsx::Package.new do |p|
+      p.workbook.add_worksheet(name: "シート名") do |sheet|
+        sheet.add_row ["First Column", "Second", "Third"]
+        sheet.add_row [1, 2, 3]
+      end
+      send_data(p.to_stream.read,
+                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                filename: "sample.xlsx")
+    end
   end
 end
