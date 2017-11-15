@@ -4,7 +4,20 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    respond_to do |format|
+      # index ページを表示するため html フォーマットについて記述
+      format.html do
+        @users = User.all
+      end
+      # index.xlsx.ruby がレンダーされる
+      format.xlsx do
+        send_data(
+            render_to_string.to_stream.read,
+            type: :xlsx,
+            filename: "users_list_" + Time.zone.now.to_date.to_s + ".xlsx"
+        )
+      end
+    end
   end
 
   # GET /users/1
@@ -29,4 +42,9 @@ class UsersController < ApplicationController
     @q = User.search(params[:q])
     @users = @q.result(distinct: true)
   end
+
+  def excel_import
+    @users = User.all
+  end
+
 end
