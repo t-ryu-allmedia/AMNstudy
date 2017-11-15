@@ -4,20 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    respond_to do |format|
-      # index ページを表示するため html フォーマットについて記述
-      format.html do
-        @users = User.all
-      end
-      # index.xlsx.ruby がレンダーされる
-      format.xlsx do
-        send_data(
-            render_to_string.to_stream.read,
-            type: :xlsx,
-            filename: "users_list_" + Time.zone.now.to_date.to_s + ".xlsx"
-        )
-      end
-    end
+    @users = User.all
   end
 
   # GET /users/1
@@ -39,12 +26,36 @@ class UsersController < ApplicationController
   end
 
   def check_list
-    @q = User.search(params[:q])
-    @users = @q.result(distinct: true)
+    respond_to do |format|
+      # index ページを表示するため html フォーマットについて記述
+      format.html do
+        @q = User.search(params[:q])
+        @users = @q.result(distinct: true)
+      end
+      # index.xlsx.ruby がレンダーされる
+      format.xlsx do
+        @q = User.search(params[:q])
+        @users = @q.result(distinct: true)
+        User.excel_import(@users)
+        file_path = "#{Rails.root.to_s}/public/sample.xlsx"
+        send_file file_path,
+                  filename: "sample.xlsx",
+                  type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      end
+    end
   end
 
-  def excel_import
-    @users = User.all
-  end
+  private
 
+  def generate_xlsx
+    Axlsx::Package.new do |p|
+      p.workbook.add_worksheet(name: "シート名") do |sheet|
+        sheet.add_row ["First Column", "Second", "Third"]
+        sheet.add_row [1, 2, 3]
+      end
+      send_data(p.to_stream.read,
+                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                filename: "sample.xlsx")
+    end
+  end
 end
