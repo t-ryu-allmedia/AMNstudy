@@ -31,6 +31,9 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'ransack'
 
+gem "font-awesome-rails"
+gem "rubyXL"
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -44,3 +47,9 @@ gem 'ransack'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+group :test, :development do
+ gem 'pry-rails'
+ gem 'pry-doc'
+ gem 'pry-stack_explorer'
+ gem 'pry-byebug'
+end

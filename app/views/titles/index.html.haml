@@ -1,0 +1,24 @@
+.container
+  %h2 Listing titles
+
+  %table
+    %tr
+      %th Date
+      %th Content
+      %th Created by user
+      %th
+      %th
+      %th
+
+    - @titles.each do |title|
+      %tr
+        %td= title.date
+        %td= title.content
+        %td= title.created_by_user
+        %td= link_to 'Show', title
+        %td= link_to 'Edit', edit_title_path(title)
+        %td= link_to 'Destroy', title, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+
+  = link_to 'New Title', new_title_path

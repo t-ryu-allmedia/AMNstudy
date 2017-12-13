@@ -1,11 +1,12 @@
 #tweets-content
   .container
+    - if notice
+      .alert.alert-info= notice
     .row
-      .col-xs-12.col-sm-4.left-content
+      .col-xs-12.col-sm-4.col-md-4.left-content
+        = render partial: "title"
         = render partial: "panel"
-      .col-xs-12.col-sm-8.right-content
-        - if notice
-          .alert.alert-info= notice
+      .col-xs-12.col-sm-8.col-md-8.right-content
         .list-group
           .list-group-item
             .btn-group

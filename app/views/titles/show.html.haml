@@ -1,0 +1,16 @@
+.container
+  %p#notice= notice
+
+  %p
+    %b Date:
+    = @title.date
+  %p
+    %b Content:
+    = @title.content
+  %p
+    %b Created by user:
+    = @title.created_by_user
+
+  = link_to '編集', edit_title_path(@title)
+  \|
+  = link_to '戻る', titles_path
